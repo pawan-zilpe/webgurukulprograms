@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 300px;
+            background: #f0f2f5;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 60%;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: white;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📝 TO-DO List</h1>
+    <p>
+        <input type="text" id="todo" placeholder="Enter your task here">
+        <button onclick="addTask()">Add Task</button>
+    </p>
+    <ul id="tasks"></ul>
+
+    <script>
+        let ele = document.getElementById('todo');
+        let task = document.getElementById('tasks');
+        let tasklist = [];
+
+        function addTask() {
+            let data = ele.value.trim();
+            if (data) {
+                tasklist.push(data);
+                showTask();
+                ele.value = "";
+            } else {
+                alert("Please enter a task!");
+            }
+        }
+
+        function showTask() {
+            let res = "";
+            for (let i = 0; i < tasklist.length; i++) {
+                res += `<li>${tasklist[i]} 
+                    <button class="remove-btn" onclick="removeTask(${i})">Remove</button>
+                </li>`;
+            }
+            task.innerHTML = res;
+        }
+
+        function removeTask(index) {
+            tasklist.splice(index, 1);
+            showTask();
+        }
+
+        showTask();
+    </script>
+
+</body>
+</html>

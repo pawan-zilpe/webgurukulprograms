@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <h2>Todo List</h2>
+    <p>
+      <input type="text" id="todo" />
+      <button onclick="addtask()">Add Task</button>
+    </p>
+    <ul id="tasks"></ul>
+    <script type="text/javascript">
+      // input
+      ele = document.getElementById("todo");
+      // ul to display data
+      tasks = document.getElementById("tasks");
+      // array to put tasklist
+      tasklist = [];
+
+      function addtask() {
+        data = ele.value;
+        tasklist.push(data); //add data to array
+        showtask();
+        ele.value = "";
+      }
+      // function to display array data
+      function showtask() {
+        res = "";
+        for (i = 0; i < tasklist.length; i++) {
+          res = res + "<li>" + tasklist[i] + "</li>";
+        }
+        console.log(res);
+        tasks.innerHTML = res;
+      }
+      showtask();
+    </script>
+  </body>
+</html>

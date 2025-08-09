@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <h2>Todo List</h2>
+    <p>
+      <input type="text" id="todo" />
+      <button onclick="addtask()">Add Task</button>
+    </p>
+    <h2>Pending Task</h2>
+    <ul id="tasks"></ul>
+
+    <h2>Completed Task Task</h2>
+    <ul id="ctasks"></ul>
+
+    <script type="text/javascript">
+      // input
+      ele = document.getElementById("todo");
+      // ul to display data
+      tasks = document.getElementById("tasks");
+      ctasks = document.getElementById("ctasks");
+      // array to put tasklist
+      tasklist = [];
+      ctasklist = [];
+
+      function addtask() {
+        data = ele.value;
+        tasklist.push(data); //add data to array
+        showtask();
+        ele.value = "";
+      }
+      // function to display array data
+      function showtask() {
+        res = "";
+        for (i = 0; i < tasklist.length; i++) {
+          res =
+            res +
+            `<li> ${tasklist[i]} 
+              <button onclick=completetask(${i})>C</button>
+              <button onclick=deletetask(${i})>X</button>
+              </li>`;
+        }
+        tasks.innerHTML = res;
+      }
+
+      function showctask() {
+        res = "";
+        for (i = 0; i < ctasklist.length; i++) {
+          res = res + `<li> ${ctasklist[i]} </li>`;
+        }
+        ctasks.innerHTML = res;
+      }
+
+      function deletetask(arg) {
+        tasklist.splice(arg, 1);
+        showtask();
+      }
+
+      function completetask(arg) {
+        // it returns the value extracted from array
+        ret = tasklist.splice(arg, 1);
+        ctasklist.push(ret);
+        showtask();
+        showctask();
+      }
+      showtask();
+    </script>
+  </body>
+</html>

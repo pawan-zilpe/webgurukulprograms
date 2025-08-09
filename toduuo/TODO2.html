@@ -1,0 +1,69 @@
+<h2>Todo list</h2>
+	<p>
+		<input type="text" id="task">
+		<button onclick="addTask();">Add Task</button>
+	</p>
+	<h4>Pending TaskList</h4>
+	<ul id="pending"></ul>
+	<h4>Completed TaskList</h4>
+	<ul id="completed"></ul>
+<script type="text/javascript">
+	t = document.querySelector('#task');
+	pending = document.querySelector('#pending');
+	completed = document.querySelector('#completed');
+ 	var tasklist=[];
+ 	var Completedtasklist=[];
+ 	function addTask(){
+ 		// fetch the value from input
+ 		tasklist.push(t.value);
+ 		t.value="";  //empty input
+ 		console.log(tasklist);
+ 		showTask();  //call function
+ 	}
+ 	function showTask(){
+ 		if(tasklist.length==0){
+ 			pending.innerHTML = "Task list is empty!";
+ 			return;
+ 		}
+ 		res = "";
+ 		for (var i =0; i<tasklist.length; i++) {
+ 			res = res + `<li> ${tasklist[i]}
+ 					<button onclick='completeTask(${i})'> C </button>
+ 					<button onclick='deleteTask(${i})'> X </button></li>`;
+ 			}
+ 		pending.innerHTML = res;
+ 	}
+ 	function showCompletedTask(){
+ 		if(Completedtasklist.length==0){
+ 			completed.innerHTML = "Task list is empty!";
+ 			return;
+ 		}
+ 		res = "";
+ 		for (var i =0; i<Completedtasklist.length; i++) {
+ 			res = res + `<li> ${Completedtasklist[i]}
+ 					<button onclick='deleteCTask(${i})'> X </button></li>`;
+ 			}
+ 		completed.innerHTML = res;
+ 	}
+ 	function deleteTask(arg){
+ 		ret = tasklist.splice(arg, 1);
+ 		console.log("ele", ret);
+ 		showTask();
+ 	}
+ 	function deleteCTask(arg){
+ 		ret = Completedtasklist.splice(arg, 1);
+ 		console.log("ele", ret);
+ 			showCompletedTask();
+ 	}
+ 	
+ 	function completeTask(arg){
+ 		ret = tasklist.splice(arg, 1);
+ 		Completedtasklist.push(ret);
+ 		showTask();
+ 		showCompletedTask();
+ 	}
+ 	showTask();
+ 	showCompletedTask();
+</script>
+</body>
+</html>
