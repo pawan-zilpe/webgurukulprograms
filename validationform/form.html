@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f8;
+      color: #333;
+      padding: 20px;
+    }
+
+    form {
+      background-color: #fff;
+      max-width: 500px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #0077cc;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #0077cc;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005fa3;
+    }
+
+    p[id^="op"] {
+      font-size: 13px;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    /* Valid & invalid colors (optional, for smoother UI) */
+    .valid {
+      color: green;
+    }
+
+    .invalid {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <form action="" method="get">
+    <h1>Character Validation</h1>
+
+    <p>Firstname: <input type="text" id="userdata" onkeyup="validateName('userdata', 'op')"></p>
+    <p id="op"></p>
+
+    <p>Lastname: <input type="text" id="userdata2" onkeyup="validateName('userdata2', 'op2')"></p>
+    <p id="op2"></p>
+
+    <p>Phone Number: <input type="text" id="userdata3" onkeyup="validateNumber('userdata3', 'op3')"></p>
+    <p id="op3"></p>
+
+    <p>Email: <input type="text" id="userdata4" onkeyup="validateEmail()"></p>
+    <p id="op4"></p>
+
+    <p>Password: <input type="password" id="userdata5" onkeyup="validatePassword()"></p>
+    <p id="op5"></p>
+
+    <p>Confirm Password: <input type="password" id="userdata6" onkeyup="validateConfirmPassword()"></p>
+    <p id="op6"></p>
+
+    <p>Address: <input type="text" id="userdata7" onkeyup="validateMinLength('userdata7', 'op7', 5, 'address')"></p>
+    <p id="op7"></p>
+
+    <p>City: <input type="text" id="userdata8" onkeyup="validateMinLength('userdata8', 'op8', 3, 'city')"></p>
+    <p id="op8"></p>
+
+    <p>State: <input type="text" id="userdata9" onkeyup="validateMinLength('userdata9', 'op9', 3, 'state')"></p>
+    <p id="op9"></p>
+
+    <p>Country: <input type="text" id="userdata10" onkeyup="validateMinLength('userdata10', 'op10', 3, 'country')"></p>
+    <p id="op10"></p>
+
+    <p>Zip Code: <input type="text" id="userdata11" onkeyup="validateZipCode()"></p>
+    <p id="op11"></p>
+
+    <p><input type="submit" value="Submit" onclick="alert('Form submitted successfully!')"></p>
+  </form>
+
+  <script>
+    function validateName(inputId, outputId) {
+      const data = document.getElementById(inputId).value;
+      const output = document.getElementById(outputId);
+      const lastChar = data.charCodeAt(data.length - 1);
+
+      if ((lastChar >= 65 && lastChar <= 90) || (lastChar >= 97 && lastChar <= 122)) {
+        output.innerHTML = "valid name";
+        output.style.color = "green";
+      } else {
+        output.innerHTML = "invalid name";
+        output.style.color = "red";
+      }
+    }
+
+    function validateNumber(inputId, outputId) {
+      const data = document.getElementById(inputId).value;
+      const output = document.getElementById(outputId);
+      const lastChar = data.charCodeAt(data.length - 1);
+
+      if (lastChar >= 48 && lastChar <= 57) {
+        output.innerHTML = "valid number";
+        output.style.color = "green";
+      } else {
+        output.innerHTML = "invalid number";
+        output.style.color = "red";
+      }
+    }
+
+    function validateEmail() {
+      const data = document.getElementById('userdata4').value;
+      const output = document.getElementById('op4');
+
+      if (data.includes('@') && data.includes('.')) {
+        output.innerHTML = "valid email";
+        output.style.color = "green";
+      } else {
+        output.innerHTML = "invalid email";
+        output.style.color = "red";
+      }
+    }
+
+    function validatePassword() {
+      const data = document.getElementById('userdata5').value;
+      const output = document.getElementById('op5');
+
+      if (data.length >= 8 && data.includes('@') && data.includes('.')) {
+        output.innerHTML = "valid password";
+        output.style.color = "green";
+      } else {
+        output.innerHTML = "invalid password";
+        output.style.color = "red";
+      }
+    }
+
+    function validateConfirmPassword() {
+      const pass = document.getElementById('userdata5').value;
+      const confirm = document.getElementById('userdata6').value;
+      const output = document.getElementById('op6');
+
+      if (pass === confirm) {
+        output.innerHTML = "password matched";
+        output.style.color = "green";
+      } else {
+        output.innerHTML = "password not matched";
+        output.style.color = "red";
+      }
+    }
+
+    function validateMinLength(inputId, outputId, minLength, fieldName) {
+      const data = document.getElementById(inputId).value;
+      const output = document.getElementById(outputId);
+
+      if (data.length >= minLength) {
+        output.innerHTML = `valid ${fieldName}`;
+        output.style.color = "green";
+      } else {
+        output.innerHTML = `invalid ${fieldName}`;
+        output.style.color = "red";
+      }
+    }
+
+    function validateZipCode() {
+      const data = document.getElementById('userdata11').value;
+      const output = document.getElementById('op11');
+
+      if (data.length >= 5 && data.length <= 10 && !isNaN(data)) {
+        output.innerHTML = "valid zip code";
+        output.style.color = "green";
+      } else {
+        output.innerHTML = "invalid zip code";
+        output.style.color = "red";
+      }
+    }
+
+
+    output.className = "invalid";
+     output.className = "valid"; // instead of style.color
+
+  </script>
+</body>
+</html>
+
+
