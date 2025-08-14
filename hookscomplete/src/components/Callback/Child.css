@@ -1,0 +1,10 @@
+import React, { useEffect } from "react";
+
+const Child = ({ returnComment }) => {
+  useEffect(() => {
+    console.log("child component is called");
+  }, [returnComment]);
+  return <div>{returnComment()}</div>;
+};
+
+export default Child;
