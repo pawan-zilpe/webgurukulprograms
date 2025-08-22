@@ -1,0 +1,47 @@
+/* Container styling */
+.col-span-8 {
+  grid-column: span 8 / span 8;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Header styling */
+.col-span-8 h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #18181b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Chart wrapper */
+.h-64 {
+  height: 16rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Tooltip custom styling */
+.recharts-tooltip-wrapper {
+  background: #fff;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* X and Y axis text */
+.recharts-cartesian-axis-tick-value {
+  font-size: 12px;
+  font-weight: bold;
+  fill: #374151;
+}
