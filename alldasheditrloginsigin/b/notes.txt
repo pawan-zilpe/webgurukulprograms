@@ -1,0 +1,12 @@
+Steps for Project:
+dependencies:
+npm i nodemon morgan mongoose bcrypt jsonwebtoken cors
+
+folder structure
+mvc pattern :  model view controller
+
+model :  database files
+controller : logic
+routes :  routing
+utils : api call, utility
+middleware :  
